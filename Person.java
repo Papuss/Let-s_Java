@@ -1,14 +1,15 @@
-package management;
+package toXML;
 
 
 public class Person {
     String firstName;
     String lastName;
-    management.Gender gender;
-    Boolean hasOscar;
-    Boolean hasGoldenGlobe;
+    Gender gender;
+    boolean hasOscar;
+    boolean hasGoldenGlobe;
+    String kutya;
 
-    public Person(String firstName,String lastName,management.Gender gender,Boolean hasOscar,Boolean hasGoldenGlobe){
+    public Person(String firstName, String lastName, Gender gender, boolean hasOscar, boolean hasGoldenGlobe){
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -32,11 +33,11 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public management.Gender getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(management.Gender gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
@@ -57,11 +58,11 @@ public class Person {
     }
 
     public String toXMLString(){
-        String returnFirstName = Tools.toXMLTag("firstname", this.firstName);
-        String returnLastName = Tools.toXMLTag("lastname", this.lastName);
-        String returnGender = Tools.toXMLTag("gender", this.gender.toString());
-        String returnHasOscar = Tools.toXMLTag("hasoscar", String.valueOf(this.hasOscar));
-        String returnHasGoldenGlobe = Tools.toXMLTag("hasgoldenglobe", String.valueOf(this.hasGoldenGlobe));
+        String returnFirstName = Tools.toXMLTag("firstname", firstName);
+        String returnLastName = Tools.toXMLTag("lastname", lastName);
+        String returnGender = Tools.toXMLTag("gender", gender.toString());
+        String returnHasOscar = Tools.toXMLTag("hasoscar", String.valueOf(hasOscar));
+        String returnHasGoldenGlobe = Tools.toXMLTag("hasgoldenglobe", String.valueOf(hasGoldenGlobe));
         String returnAll = returnFirstName + returnLastName + returnGender + returnHasOscar + returnHasGoldenGlobe;
         return ("person") + returnAll;
 

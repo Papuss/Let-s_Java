@@ -1,15 +1,15 @@
-package management;
+package toXML;
 
 import java.util.List;
 
 public class Movie {
     String title;
     Genre genre;
-    Long duration;
-    Double rate;
+    long duration;
+    double rate;
     List<Person> cast;
 
-    public Movie(String title,Genre genre,Long duration,Double rate,List<Person> cast){
+    public Movie(String title,Genre genre,long duration,double rate,List<Person> cast){
         this.title = title;
         this.genre = genre;
         this.duration = duration;
@@ -60,10 +60,14 @@ public class Movie {
 
 
     public String toXMLString(){
-        String returnTitle = Tools.toXMLTag("title",this.title);
-        String returnGenre = Tools.toXMLTag("genre", this.genre.toString());
-        String returnDuration = Tools.toXMLTag("duration", String.valueOf(this.duration));
-        String returnRate = ("rate") + this.rate;
+        String returnTitle = Tools.toXMLTag("title",title);
+        String returnGenre = Tools.toXMLTag("genre", genre.toString());
+        String returnDuration = Tools.toXMLTag("duration", String.valueOf(duration));
+        String returnRate = "rate" + rate;
+//        StringBuilder castbuilder = new StringBuilder();
+//        for (Person person : cast){
+//
+//        }
         String returnAlll = returnTitle + returnGenre + returnDuration + returnRate;
         return ("movie") + returnAlll;
 

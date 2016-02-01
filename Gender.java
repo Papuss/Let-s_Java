@@ -1,4 +1,4 @@
-package management;
+package toXML;
 public enum Gender {
     MALE, FEMALE
 }

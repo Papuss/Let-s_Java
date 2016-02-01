@@ -1,4 +1,4 @@
-package management;
+package toXML;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
@@ -22,9 +22,9 @@ public class Tools {
     }
 
     public static String[] getMovieTitles(ArrayList<Movie> movies){
-        int movie = movies.size();
-        String[] result = new String[movie];
-        for (int i=0;i<movie;i++){
+        int movieNum = movies.size();
+        String[] result = new String[movieNum];
+        for (int i=0;i<movieNum;i++){
             result[i] = movies.get(i).getTitle();
         }
         return result;

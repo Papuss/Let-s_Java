@@ -1,8 +1,7 @@
-package management;
+package toXML;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.io.*;
 
 public class MovieManager {
 
@@ -20,26 +19,28 @@ public class MovieManager {
         persons.add(Mentors);
         persons.add(Kukac);
 
-        Movie Film1 = new Movie("Mr.Old",Genre.DRAMA,120L,8.7,persons);
+        Movie film1 = new Movie("Mr.Old",Genre.DRAMA,120L,8.7,persons);
         List<Movie> movies =new ArrayList<Movie>();
-        movies.add(Film1);
+        movies.add(film1);
 
 
-        try
-        {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(new File(FILE_PATH)));
-            StringBuffer sb = new StringBuffer();
-            sb.append("<movies>");
-            sb.append(Film1.toXMLString());
-            sb.append(Papus.toXMLString());
-            sb.append("</movies>");
-            bw.write(sb.toString());
-            bw.flush();
-            bw.close();
-        } catch (IOException e)
-        {
-            System.out.println(e);
-        }
+
+//
+//        try
+//        {
+//            BufferedWriter bw = new BufferedWriter(new FileWriter(new File(FILE_PATH)));
+//            StringBuffer sb = new StringBuffer();
+//            sb.append("<movies>");
+//            sb.append(Film1.toXMLString());
+//            sb.append(Papus.toXMLString());
+//            sb.append("</movies>");
+//            bw.write(sb.toString());
+//            bw.flush();
+//            bw.close();
+//        } catch (IOException e)
+//        {
+//            System.out.println(e);
+//        }
 
 
     }
