@@ -5,16 +5,21 @@ public class Person {
     String firstName;
     String lastName;
     Gender gender;
-    boolean hasOscar;
-    boolean hasGoldenGlobe;
-    String kutya;
+    int salary;
 
-    public Person(String firstName, String lastName, Gender gender, boolean hasOscar, boolean hasGoldenGlobe){
+    public Person(String firstName, String lastName, Gender gender, int salary){
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
-        this.hasOscar = hasOscar;
-        this.hasGoldenGlobe = hasGoldenGlobe;
+        this.salary = salary;
+    }
+
+    public int getSalary() {
+        return salary;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = salary;
     }
 
     public String getFirstName() {
@@ -41,31 +46,5 @@ public class Person {
         this.gender = gender;
     }
 
-    public Boolean getHasOscar() {
-        return hasOscar;
-    }
-
-    public void setHasOscar(Boolean hasOscar) {
-        this.hasOscar = hasOscar;
-    }
-
-    public Boolean getHasGoldenGlobe() {
-        return hasGoldenGlobe;
-    }
-
-    public void setHasGoldenGlobe(Boolean hasGoldenGlobe) {
-        this.hasGoldenGlobe = hasGoldenGlobe;
-    }
-
-    public String toXMLString(){
-        String returnFirstName = Tools.toXMLTag("firstname", firstName);
-        String returnLastName = Tools.toXMLTag("lastname", lastName);
-        String returnGender = Tools.toXMLTag("gender", gender.toString());
-        String returnHasOscar = Tools.toXMLTag("hasoscar", String.valueOf(hasOscar));
-        String returnHasGoldenGlobe = Tools.toXMLTag("hasgoldenglobe", String.valueOf(hasGoldenGlobe));
-        String returnAll = returnFirstName + returnLastName + returnGender + returnHasOscar + returnHasGoldenGlobe;
-        return ("person") + returnAll;
-
-    }
 
 }

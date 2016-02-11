@@ -2,27 +2,33 @@ package toXML;
 
 import java.util.List;
 
-public class Movie {
-    String title;
+public class Movie extends Product implements Buyable{
+
     Genre genre;
     long duration;
     double rate;
     List<Person> cast;
+    int price;
 
-    public Movie(String title,Genre genre,long duration,double rate,List<Person> cast){
-        this.title = title;
+
+
+
+    public Movie(String title,Person person,Genre genre,long duration,double rate,List<Person> cast,int price){
+        super(title,person);
         this.genre = genre;
         this.duration = duration;
         this.rate = rate;
         this.cast = cast;
+        this.price = price;
     }
 
-    public String getTitle() {
-        return title;
+
+    public int getPrice() {
+        return price;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setPrice(int price) {
+        this.price = price;
     }
 
 
@@ -58,20 +64,18 @@ public class Movie {
         this.cast = cast;
     }
 
+    public long getInvestment(){
+        int investment = 0;
 
-    public String toXMLString(){
-        String returnTitle = Tools.toXMLTag("title",title);
-        String returnGenre = Tools.toXMLTag("genre", genre.toString());
-        String returnDuration = Tools.toXMLTag("duration", String.valueOf(duration));
-        String returnRate = "rate" + rate;
-//        StringBuilder castbuilder = new StringBuilder();
-//        for (Person person : cast){
-//
-//        }
-        String returnAlll = returnTitle + returnGenre + returnDuration + returnRate;
-        return ("movie") + returnAlll;
-
+        for (Person person : cast){
+            investment += person.getSalary();
+        }
+        return investment;
     }
+
+
+
+
 
 
 }
