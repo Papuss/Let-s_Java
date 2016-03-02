@@ -1,6 +1,8 @@
-package toXML;
+package toXML_Movies2dot0;
 
-public class Book extends Product {
+import java.io.Serializable;
+
+public class Book extends Product implements Serializable {
 
     Person author;
 
@@ -18,7 +20,7 @@ public class Book extends Product {
     }
 
     public long getInvestment(){
-        return author.salary;
+        return author.getSalary();
 
     }
 

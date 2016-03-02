@@ -1,7 +1,6 @@
-package toXML;
+package toXML_Movies2dot0;
 
 import java.util.Random;
-import java.util.StringJoiner;
 
 public class IdGenerator {
 
@@ -11,10 +10,8 @@ public class IdGenerator {
         double randNum = 0;
         for (int i = 0; i < 500; i++)
         {
-            randNum += rNumGenerate.nextInt(150);
+            randNum += rNumGenerate.nextInt(150) + i;
         }
-
-
 
         if (product instanceof Movie){
             id = "MOV";

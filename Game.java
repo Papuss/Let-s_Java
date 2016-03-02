@@ -1,4 +1,4 @@
-package toXML;
+package toXML_Movies2dot0;
 
 import java.util.List;
 
@@ -45,7 +45,7 @@ public class Game extends Product implements Buyable {
         this.price = price;
     }
 
-
+    @Override
     public long getInvestment(){
         int investment  = 0;
         for (Person person : staff){

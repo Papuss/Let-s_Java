@@ -1,7 +1,9 @@
-package toXML;
+package toXML_Movies2dot0;
 
 
-public class Person {
+import java.io.Serializable;
+
+public class Person implements Serializable {
     String firstName;
     String lastName;
     Gender gender;
@@ -46,5 +48,11 @@ public class Person {
         this.gender = gender;
     }
 
+    @Override
+    public String toString()
+    {
+
+        return firstName + " " + lastName;
+    }
 
 }

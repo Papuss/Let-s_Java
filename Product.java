@@ -1,6 +1,8 @@
-package toXML;
+package toXML_Movies2dot0;
 
-public class Product {
+import java.io.Serializable;
+
+public abstract class Product implements Serializable {
 
     String id;
     String title;
@@ -35,6 +37,10 @@ public class Product {
     public void setPerson(Person person) {
         this.person = person;
     }
+
+    abstract long getInvestment();
+
+
 
 
 }

@@ -1,13 +1,18 @@
-package toXML;
+package toXML_Movies2dot0;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 
 public class RentManager {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Person papus = new Person("Gazdik","Zsolt",Gender.MALE,500000);
         Person lacos = new Person("Eperjesi","Laszlo",Gender.MALE,350000);
@@ -41,7 +46,7 @@ public class RentManager {
         List<Person> bookworms = new ArrayList<>();
 
 
-        Movie azOtKerek = new Movie("Az öt kerék",papus,Genre.DRAMA,120,8.7,azOtKerekCast,130000);
+        Movie azOtKerek = new Movie("Az öt kerék",papus,Genre.DRAMA,120,8.7,azOtKerekCast,13000);
         Movie kolisElet = new Movie("Kolis élet",lacos,Genre.SCI_FI,135,5.4,kolisEletCast,2500);
         Movie privateMovie = new Movie("Private Movie",niki,Genre.ACTION,90,9.8,privateMovieCast,3500);
 
@@ -68,34 +73,89 @@ public class RentManager {
         products.add(aTerseg);
         products.add(luciferHatas);
 
-        
-        for (int i = 0;i < products.size();i++){
-            System.out.println(products.get(i).getTitle());
-            System.out.println(products.get(i).getId());
-            System.out.println("*********************************************************");
+
+
+
+
+
+
+
+
+        Socket clientSocket = new Socket("localhost",666);
+        ObjectOutputStream oos = new ObjectOutputStream(clientSocket.getOutputStream());
+        ObjectInputStream ois = new ObjectInputStream(clientSocket.getInputStream());
+
+
+        Scanner sc = new Scanner(System.in);
+        String input;
+
+
+        label:
+        while (true) {
+            System.out.println("Client started, enter Commands(PUT,GET,EXIT): ");
+            try {
+                input = sc.nextLine();
+                switch (input) {
+                    case "PUT":
+                        oos.writeObject(Command.PUT);
+                        oos.write(0);
+                        oos.writeObject(papus);
+                        oos.write(0);
+                        oos.writeObject(azOtKerek);
+                        oos.flush();
+                        break;
+                    case "GET":
+                        oos.writeObject(Command.GET);
+                        List<Object> res = new ArrayList<>();
+                        try{
+                            res.add(ois.readObject());
+                            if (!res.isEmpty()){
+                                for (Object o : res){
+                                    System.out.println(o);
+                                }
+                            } else{
+                                System.out.println("Server sent empty list");
+                            }
+                        } catch (Exception e){
+                            e.printStackTrace();
+                        }
+                        break;
+                    case "EXIT":
+                        oos.writeObject(Command.EXIT);
+                        break label;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
-        List<Product> buyableStuff = new ArrayList<>();
+//        for (int i = 0;i < products.size();i++){
+//            System.out.println(products.get(i).getTitle());
+//            System.out.println(products.get(i).getId());
+//            System.out.println("*********************************************************");
+//        }
+
+        List<Buyable> buyableStuff = new ArrayList<Buyable>();
         for (Product product : products){
             if (product instanceof Game){
-                buyableStuff.add(product);
+                buyableStuff.add((Game) product);
             }
             if (product instanceof Movie){
-                buyableStuff.add(product);
+                buyableStuff.add((Movie) product);
             }
         }
 
-
-        /*Buyable stuff print
-        for (int i = 0;i < buyableStuff.size();i++){
-            System.out.println(buyableStuff.get(i).getTitle());
-            System.out.println(buyableStuff.get(i).getId());
-            System.out.println("*********************************************************");
-        }*/
+//        for (int i = 0;i < buyableStuff.size();i++){
+//            System.out.println(buyableStuff.get(i).getTitle());
+//            System.out.println(buyableStuff.get(i).getId());
+//            System.out.println("*********************************************************");
+//        }
     }
-    public static int incomeFromBuyableProducts(List<Buyable> buyableList){
+
+
+    public static int incomeFromBuyableProducts(List<Buyable> buyableStuff){
         int result=0;
-        for (Buyable buyable : buyableList){
+        for (Buyable buyable : buyableStuff){
             result += buyable.getPrice();
         }
         return result;

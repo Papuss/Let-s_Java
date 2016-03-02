@@ -1,8 +1,9 @@
-package toXML;
+package toXML_Movies2dot0;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Movie extends Product implements Buyable{
+public class Movie extends Product implements Buyable,Serializable{
 
     Genre genre;
     long duration;
@@ -64,6 +65,7 @@ public class Movie extends Product implements Buyable{
         this.cast = cast;
     }
 
+    @Override
     public long getInvestment(){
         int investment = 0;
 
@@ -71,6 +73,13 @@ public class Movie extends Product implements Buyable{
             investment += person.getSalary();
         }
         return investment;
+    }
+
+
+    @Override
+    public String toString()
+    {
+        return title;
     }
 
 
